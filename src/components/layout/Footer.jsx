@@ -9,16 +9,16 @@ function Footer() {
         
         <div className="footer-section">
           <h3>Link Cepat</h3>
-          <a href="/about">Tentang</a>
+          <a href="/">Beranda</a>
           <a href="/volunteers">Relawan</a>
           <a href="/activities">Kegiatan</a>
-          <a href="/contact">Kontak</a>
+          <a href="/donation">Donasi</a>
         </div>
         
         <div className="footer-section">
           <h3>Kontak</h3>
           <p>📞 +62 812 3456 7890</p>
-          <p>✉️ info@relawanaksi.com</p>
+          <p>✉️ info@aksiterimakasih.org</p>
           <p>📍 Jakarta, Indonesia</p>
         </div>
         
@@ -28,12 +28,11 @@ function Footer() {
             <a href="#">📘</a>
             <a href="#">📷</a>
             <a href="#">🐦</a>
-            <a href="#">▶️</a>
           </div>
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2026 RelawanAksi. All rights reserved.</p>
+        <p>&copy; 2026 Aksi Terima Kasih Bumi. All rights reserved.</p>
       </div>
     </footer>
   );

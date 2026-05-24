@@ -7,7 +7,17 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <div className="nav-logo">
-          <span className="logo-icon">🌏</span>
+          <img 
+            src="/images/logobulat.jpg" 
+            alt="Logo Aksi Terima Kasih" 
+            style={{ 
+              height: '40px', 
+              width: '40px',
+              borderRadius: '50%',
+              objectFit: 'cover',
+              marginRight: '8px'
+            }} 
+          />
           <span className="logo-text">Aksi</span> Terima Kasih
         </div>
         

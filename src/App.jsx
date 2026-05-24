@@ -9,20 +9,10 @@ import DonationPage from './pages/DonationPage';
 import EmergencyPage from './pages/EmergencyPage';
 import './App.css';
 
-// Background Animations: Daun Jatuh + Rintik Hujan + Sparkle
 function BackgroundAnimations() {
   return (
-    <div style={{ 
-      position: 'fixed', 
-      top: 0, 
-      left: 0, 
-      width: '100%', 
-      height: '100%', 
-      overflow: 'hidden', 
-      zIndex: 0, 
-      pointerEvents: 'none' 
-    }}>
-      {/* Daun-daun Jatuh */}
+    <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 0, pointerEvents: 'none' }}>
+      {/* Daun Jatuh */}
       <div className="leaf leaf1">🍃</div>
       <div className="leaf leaf2">🍂</div>
       <div className="leaf leaf3">🌿</div>
@@ -67,7 +57,6 @@ function BackgroundAnimations() {
 }
 
 function App() {
-  // Scroll Reveal Effect
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
