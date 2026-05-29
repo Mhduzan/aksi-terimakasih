@@ -96,82 +96,401 @@ body {
   --light-blue: #a8d8ff;
 }
 
-/* Navbar */
+/* ========================================
+   NAVBAR GRADASI MERAH HATI DENGAN ANIMASI
+   ======================================== */
+
+/* Animasi gradasi bergerak */
+@keyframes gradientFlowNav {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animasi shimmer pada border */
+@keyframes borderShimmer {
+  0% {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 5px rgba(255, 100, 100, 0.3);
+  }
+  50% {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 20px rgba(255, 80, 80, 0.6);
+  }
+  100% {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 5px rgba(255, 100, 100, 0.3);
+  }
+}
+
+/* Animasi pulse untuk logo glow */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
 .navbar {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
+  background: linear-gradient(135deg, 
+    #8B0000 0%, 
+    #B22222 20%, 
+    #DC143C 40%, 
+    #FF6B6B 60%, 
+    #FFB3B3 80%, 
+    #FFFFFF 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientFlowNav 4s ease infinite;
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
-  border-bottom: 1px solid var(--glass-border);
+  transition: all 0.4s ease;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+  background: linear-gradient(135deg, 
+    #8B0000 0%, 
+    #B22222 25%, 
+    #DC143C 50%, 
+    #FF6B6B 75%, 
+    #FFFFFF 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientFlowNav 3s ease infinite;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 215, 215, 0.5);
+}
+
+/* Efek shimmer pada navbar setelah scroll */
+.navbar.scrolled::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent
+  );
+  animation: borderShimmer 3s infinite;
+  pointer-events: none;
 }
 
 .nav-container {
-  width: 100%;
-  padding: 0.8rem 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.8rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1400px;
-  margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
+/* Logo Section */
 .nav-logo {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: white;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.3rem 0.8rem 0.3rem 0.5rem;
+  border-radius: 50px;
+  backdrop-filter: blur(5px);
 }
 
-.logo-icon { font-size: 1.5rem; }
-.logo-text { color: var(--light-blue); }
+.nav-logo:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 20px rgba(255, 200, 200, 0.4);
+}
 
+.logo-wrapper {
+  position: relative;
+}
+
+/* Update ukuran logo di Navbar */
+.logo-img {
+  height: 55px !important;  /* Lebih besar dari sebelumnya (40px) */
+  width: 55px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+/* Update glow wrapper */
+.logo-wrapper {
+  position: relative;
+  width: 55px;
+  height: 55px;
+}
+
+.logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+  animation: pulseGlow 2s ease infinite;
+  pointer-events: none;
+}
+
+/* Update nav-logo agar lebih proporsional dengan logo besar */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.3rem 1rem 0.3rem 0.6rem;
+  border-radius: 60px;
+  backdrop-filter: blur(5px);
+}
+
+.logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+  animation: pulseGlow 2s ease infinite;
+  pointer-events: none;
+}
+
+.logo-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-text {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.3px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.logo-subtext {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.5px;
+}
+
+/* Navigation Links */
 .nav-menu {
   display: flex;
   gap: 1.5rem;
   align-items: center;
 }
 
-.nav-menu a {
+.nav-link {
+  position: relative;
   text-decoration: none;
-  color: white;
-  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
   font-size: 0.9rem;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.nav-menu a:hover { color: var(--light-blue); }
+.nav-link:hover {
+  color: white;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  box-shadow: 0 0 5px white;
+}
+
+.nav-link:hover .nav-indicator {
+  width: 70%;
+}
+
+.emergency-link span:first-child {
+  color: #FFF5F5;
+  font-weight: 700;
+}
+
+.emergency-link:hover span:first-child {
+  color: white;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Buttons */
+.nav-buttons {
+  display: flex;
+  gap: 0.8rem;
+  margin-left: 0.5rem;
+}
 
 .btn-login, .btn-register {
-  padding: 0.4rem 1rem;
-  border-radius: 30px;
+  padding: 0.45rem 1.2rem;
+  border-radius: 40px;
   font-weight: 600;
-  font-size: 0.8rem;
-  transition: all 0.3s;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
 }
 
 .btn-login {
-  border: 1px solid white;
-  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.15);
   color: white;
 }
-.btn-login:hover { background: white; color: #0a3b5c; }
+
+.btn-login:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
 
 .btn-register {
   background: white;
-  color: #0a3b5c;
+  color: #B22222;
+  border: none;
+  font-weight: 700;
 }
+
 .btn-register:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255,255,255,0.3);
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.4);
+  background: #FFF5F5;
 }
 
-.menu-toggle { display: none; }
+/* Mobile Menu Button */
+.menu-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+}
 
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: white;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .nav-container {
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 320px;
+    height: 100vh;
+    background: linear-gradient(135deg, #8B0000 0%, #DC143C 50%, #FF6B6B 100%);
+    background-size: 200% 200%;
+    animation: gradientFlowNav 3s ease infinite;
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 20px 0 0 20px;
+  }
+  
+  .nav-menu.active {
+    right: 0;
+  }
+  
+  .nav-link {
+    font-size: 1.1rem;
+    width: 100%;
+    text-align: center;
+    color: white;
+  }
+  
+  .nav-buttons {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+  
+  .btn-login, .btn-register {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .nav-logo {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
 /* Hero Section */
 .hero-section {
   min-height: 100vh;
@@ -784,4 +1103,514 @@ body {
 
 .cta-section img {
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ========================================
+   NAVBAR DENGAN ANIMASI MEMUKAU
+   ======================================== */
+
+/* Animasi gradasi bergerak */
+@keyframes gradientFlowNav {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animasi ring berputar */
+@keyframes spinRing {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes spinRingReverse {
+  0% { transform: translate(-50%, -50%) rotate(360deg); }
+  100% { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+/* Animasi pulse untuk logo glow */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+}
+
+/* Animasi sparkle / kilau */
+@keyframes sparkleAnim {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Animasi particle floating */
+@keyframes floatParticle {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-80px) translateX(20px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes floatParticle2 {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) translateX(-30px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* Navbar Particles */
+.navbar-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.particle-1 {
+  top: 20%;
+  left: 10%;
+  animation: floatParticle 3s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.particle-2 {
+  top: 60%;
+  left: 85%;
+  width: 6px;
+  height: 6px;
+  animation: floatParticle2 4s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.particle-3 {
+  top: 40%;
+  left: 15%;
+  width: 3px;
+  height: 3px;
+  animation: floatParticle 3.5s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.particle-4 {
+  top: 70%;
+  left: 70%;
+  width: 5px;
+  height: 5px;
+  animation: floatParticle2 4.5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.particle-5 {
+  top: 30%;
+  left: 95%;
+  width: 4px;
+  height: 4px;
+  animation: floatParticle 3.2s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.navbar {
+  background: linear-gradient(135deg, 
+    #8B0000 0%, 
+    #B22222 20%, 
+    #DC143C 40%, 
+    #FF6B6B 60%, 
+    #FFB3B3 80%, 
+    #FFFFFF 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientFlowNav 4s ease infinite;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: all 0.4s ease;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Efek shimmer overlay */
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+  animation: spinRing 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.navbar.scrolled {
+  background: linear-gradient(135deg, 
+    #8B0000 0%, 
+    #B22222 25%, 
+    #DC143C 50%, 
+    #FF6B6B 75%, 
+    #FFFFFF 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientFlowNav 3s ease infinite;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 215, 215, 0.5);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo Section - Memukau */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.3rem 1rem 0.3rem 0.6rem;
+  border-radius: 60px;
+  backdrop-filter: blur(5px);
+  position: relative;
+  z-index: 2;
+}
+
+.nav-logo:hover {
+  transform: scale(1.03);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 30px rgba(255, 200, 200, 0.6);
+}
+
+/* Efek ring berputar di sekitar logo */
+.logo-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85px;
+  height: 85px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  animation: spinRing 3s linear infinite;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.logo-ring-secondary {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95px;
+  height: 95px;
+  border: 1.5px solid rgba(255, 200, 200, 0.4);
+  border-radius: 50%;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  animation: spinRingReverse 4s linear infinite;
+}
+
+.logo-wrapper {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.logo-img {
+  height: 60px !important;
+  width: 60px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.nav-logo:hover .logo-img {
+  border-color: white;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+  transform: scale(1.05);
+}
+
+.logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+  animation: pulseGlow 2s ease infinite;
+  pointer-events: none;
+}
+
+.logo-sparkle {
+  position: absolute;
+  top: 10%;
+  left: 70%;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px white;
+  animation: sparkleAnim 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.logo-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-text {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.3px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.logo-subtext {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.5px;
+}
+
+/* Navigation Links */
+.nav-menu {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link:hover {
+  color: white;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  box-shadow: 0 0 5px white;
+}
+
+.nav-link:hover .nav-indicator {
+  width: 70%;
+}
+
+.emergency-link span:first-child {
+  color: #FFF5F5;
+  font-weight: 700;
+}
+
+/* Buttons */
+.nav-buttons {
+  display: flex;
+  gap: 0.8rem;
+  margin-left: 0.5rem;
+}
+
+.btn-login, .btn-register {
+  padding: 0.45rem 1.2rem;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.btn-login {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.btn-login:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-register {
+  background: white;
+  color: #B22222;
+  border: none;
+  font-weight: 700;
+}
+
+.btn-register:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.4);
+  background: #FFF5F5;
+}
+
+/* Mobile Menu Button */
+.menu-toggle {
+  display: none;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+}
+
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: white;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .nav-container {
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 320px;
+    height: 100vh;
+    background: linear-gradient(135deg, #8B0000 0%, #DC143C 50%, #FF6B6B 100%);
+    background-size: 200% 200%;
+    animation: gradientFlowNav 3s ease infinite;
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: 20px 0 0 20px;
+  }
+  
+  .nav-menu.active {
+    right: 0;
+  }
+  
+  .nav-link {
+    font-size: 1.1rem;
+    width: 100%;
+    text-align: center;
+    color: white;
+  }
+  
+  .nav-buttons {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+  
+  .btn-login, .btn-register {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .logo-ring, .logo-ring-secondary {
+    display: none;
+  }
 }
