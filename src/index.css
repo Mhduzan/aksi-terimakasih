@@ -6,10 +6,11 @@
 
 html, body {
   width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: auto;
+  /* Biarkan user scroll horizontal */
 }
 
 body {
+  font-family: 'Poppins', sans-serif;
   min-height: 100vh;
 }
