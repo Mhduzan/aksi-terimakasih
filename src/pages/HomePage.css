@@ -1,0 +1,788 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.homepage {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ========================================
+   STARBUCKS STYLE NAVBAR
+   ======================================== */
+.starbucks-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.4s ease;
+  background: transparent;
+}
+
+.starbucks-header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  padding: 12px 5%;
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.header-logo img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.header-logo:hover img {
+  transform: scale(1.05);
+}
+
+.logo-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2C1810;
+}
+
+.logo-text span {
+  color: #E74C3C;
+}
+
+.starbucks-header.scrolled .logo-text {
+  color: #2C1810;
+}
+
+/* Navigation Menu */
+.header-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.header-nav li {
+  list-style: none;
+}
+
+.header-nav li a {
+  display: inline-block;
+  color: #333;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.header-nav li a:hover {
+  color: #E74C3C;
+}
+
+.starbucks-header.scrolled .header-nav li a {
+  color: #333;
+}
+
+.starbucks-header.scrolled .header-nav li a:hover {
+  color: #E74C3C;
+}
+
+/* Nav Buttons */
+.nav-login {
+  background: transparent;
+  border: 1px solid #E74C3C;
+  padding: 6px 18px;
+  border-radius: 30px;
+  color: #E74C3C !important;
+}
+
+.nav-login:hover {
+  background: #E74C3C;
+  color: #fff !important;
+}
+
+.nav-register {
+  background: #E74C3C;
+  padding: 6px 18px;
+  border-radius: 30px;
+  color: #fff !important;
+}
+
+.nav-register:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Mobile Menu Button */
+.menu-toggle-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 100;
+}
+
+.menu-toggle-btn span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background: #2C1810;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.starbucks-header.scrolled .menu-toggle-btn span {
+  background: #2C1810;
+}
+
+.menu-toggle-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Responsive Navbar */
+@media (max-width: 992px) {
+  .menu-toggle-btn {
+    display: block;
+  }
+  
+  .header-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    z-index: 99;
+  }
+  
+  .header-nav.active {
+    right: 0;
+  }
+  
+  .header-nav li a {
+    font-size: 1rem;
+    color: #2C1810;
+  }
+  
+  .starbucks-header.scrolled .header-nav li a {
+    color: #2C1810;
+  }
+  
+  .nav-login, .nav-register {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ========================================
+   HERO SECTION - STARBUCKS STYLE
+   ======================================== */
+.hero-starbucks {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  overflow: hidden;
+}
+
+.circle-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: circle(600px at right 800px);
+  transition: background 0.5s ease;
+  z-index: 0;
+}
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  gap: 3rem;
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero-text h2 {
+  color: #333;
+  font-size: 4em;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-text h2 span {
+  color: #E74C3C;
+  font-size: 1.2em;
+  font-weight: 900;
+  transition: color 0.3s ease;
+}
+
+.hero-text p {
+  color: #666;
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.btn-donate {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #E74C3C;
+  color: #fff;
+  border-radius: 40px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-donate:hover {
+  background: #c0392b;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image {
+  width: 500px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-image img {
+  max-width: 340px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Thumbnails */
+.thumb-list {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 2;
+}
+
+.thumb-list li {
+  list-style: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.thumb-list li:hover {
+  transform: translateY(-10px);
+}
+
+.thumb-list li img {
+  max-width: 60px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.thumb-list li img:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Social Icons */
+.social-icons {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 2;
+}
+
+.social-icons li {
+  list-style: none;
+}
+
+.social-icons li a {
+  display: inline-block;
+  transform: scale(0.6);
+  transition: transform 0.3s ease;
+}
+
+.social-icons li a:hover {
+  transform: scale(0.7);
+}
+
+.social-icons li a img {
+  width: 40px;
+  filter: invert(1);
+}
+
+/* ========================================
+   PROGRAM SECTION
+   ======================================== */
+.programs-section {
+  padding: 80px 5%;
+  background: #fff9f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-tag {
+  display: inline-block;
+  background: #E74C3C10;
+  color: #E74C3C;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2C1810;
+  margin-bottom: 0.5rem;
+}
+
+.section-header p {
+  color: #666;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.program-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.program-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.program-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2rem;
+}
+
+.program-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #2C1810;
+}
+
+.program-card p {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.program-link {
+  color: #E74C3C;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.program-link:hover {
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   ACTIVITIES SECTION
+   ======================================== */
+.activities-section {
+  padding: 80px 5%;
+  background: #ffffff;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.activity-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.activity-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.activity-content {
+  padding: 1.5rem;
+}
+
+.activity-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2C1810;
+}
+
+.activity-meta {
+  color: #888;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.activity-beneficiaries {
+  color: #E74C3C;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.text-center {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.btn-outline {
+  padding: 0.8rem 2rem;
+  background: transparent;
+  border: 2px solid #E74C3C;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #E74C3C;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: #E74C3C;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   TESTIMONIALS SECTION
+   ======================================== */
+.testimonials-section {
+  padding: 80px 5%;
+  background: #E74C3C08;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.testimonial-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-avatar {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 1rem;
+}
+
+.testimonial-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial-text {
+  color: #666;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.testimonial-content h4 {
+  font-weight: 600;
+  color: #2C1810;
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-content span {
+  color: #E74C3C;
+  font-size: 0.85rem;
+}
+
+.testimonial-stars {
+  color: #E74C3C;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* ========================================
+   CTA SECTION
+   ======================================== */
+.cta-section {
+  padding: 80px 5%;
+  background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+  text-align: center;
+}
+
+.cta-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 3rem;
+}
+
+.cta-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  padding: 1rem 2.5rem;
+  background: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #E74C3C;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+  padding: 1rem 2.5rem;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 1024px) {
+  .hero-text h2 {
+    font-size: 3em;
+  }
+  
+  .hero-image {
+    width: 400px;
+  }
+  
+  .hero-image img {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-starbucks {
+    padding: 120px 5% 80px;
+    flex-direction: column;
+  }
+  
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .hero-text {
+    max-width: 100%;
+  }
+  
+  .hero-image {
+    width: 100%;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .circle-bg {
+    clip-path: circle(800px at center);
+  }
+  
+  .thumb-list {
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .social-icons {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .social-icons li a {
+    transform: scale(0.8);
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .cta-section h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-text h2 {
+    font-size: 2em;
+  }
+  
+  .programs-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .activities-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .thumb-list li img {
+    max-width: 50px;
+  }
+}

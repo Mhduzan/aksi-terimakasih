@@ -1,147 +1,341 @@
-import HeroSection from '../components/layout/HeroSection';
-import ActivityCard from '../components/cards/ActivityCard';
-import VolunteerCard from '../components/cards/VolunteerCard';
-import ParallaxCard from '../components/ui/ParallaxCard';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import './HomePage.css';
+import heroBg from '../assets/images/terimakasihbacgroun.jpg';
+import sosialisasi from '../assets/images/sosialisasi.jpg';
+import sosialisasi2 from '../assets/images/sosialisasi2.jpg';
+// import donorDarahImage from '../assets/images/donor-darah.jpg'; // ← TAMBAHKAN INI
 
 function HomePage() {
-  const campaigns = [
-    { title: 'Hentikan Pencemar Plastik', date: 'Sepanjang 2026', location: 'Asia Tenggara', volunteers: 2300, status: 'berlangsung', image: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400' },
-    { title: 'Lindungi Hutan Kalimantan', date: '15 Mei 2026', location: 'Kalimantan', volunteers: 150, status: 'aktif', image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=400' },
-    { title: 'Energi Bersih untuk Nelayan', date: '10 Juni 2026', location: 'Pulau Jawa', volunteers: 89, status: 'aktif', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400' }
+  const [activeProduct, setActiveProduct] = useState(0);
+  const [circleColor, setCircleColor] = useState('#E74C3C');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll effect
+  useState(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const products = [
+    {
+      id: 0,
+      title: 'Program Berbagi Makanan',
+      subtitle: 'Buka Puasa & Makanan Bergizi',
+      description: 'Berbagi makanan bergizi untuk anak-anak dan keluarga kurang mampu, terutama di bulan Ramadan dan hari-hari besar.',
+      buttonText: 'Dukung Program',
+      image: '/images/logoterbaru.jpg',
+      thumb: '/images/logoterbaru.jpg',
+      color: '#E74C3C',
+      icon: '🍲'
+    },
+    // Program Pendidikan (opsional, bisa di-uncomment jika ingin ditampilkan)
+    // {
+    //   id: 1,
+    //   title: 'Program Pendidikan',
+    //   subtitle: 'Beasiswa & Bimbingan Belajar',
+    //   description: 'Memberikan beasiswa pendidikan dan bimbingan belajar gratis untuk anak-anak pra-sejahtera agar mereka bisa meraih cita-cita.',
+    //   buttonText: 'Dukung Program',
+    //   image: heroBg,
+    //   thumb: heroBg,
+    //   color: '#27AE60',
+    //   icon: '📚'
+    // },
+    {
+      id: 2,
+      title: 'Program Sembako',
+      subtitle: 'Bahan Pokok & Sandang',
+      description: 'Pembagian paket sembako dan pakaian layak pakai untuk keluarga kurang mampu di berbagai daerah.',
+      buttonText: 'Dukung Program',
+      image: sosialisasi,
+      thumb: sosialisasi,
+      color: '#3498DB',
+      icon: '🛒'
+    },
+    {
+      id: 3,
+      title: 'Donor Darah',
+      subtitle: 'Kerjasama dengan PT Pulau Sambu & Sambu Group',
+      description: 'Program donor darah rutin yang bekerja sama dengan PT Pulau Sambu dan Sambu Group. Setiap tetes darah sangat berharga untuk menyelamatkan nyawa sesama. Ayo donor darah!',
+      buttonText: 'Daftar Donor',
+      image: sosialisasi,
+      thumb: sosialisasi,
+       color: '#27AE60',
+      icon: '🩸'
+    }
   ];
 
-  const topVolunteers = [
-    { name: 'Ahmad F.', role: 'Koordinator Hutan', location: 'Kalimantan', skills: ['Konservasi', 'Advokasi'], joinedDate: '2023', avatar: 'https://randomuser.me/api/portraits/men/1.jpg' },
-    { name: 'Siti R.', role: 'Aktivis Laut', location: 'Bali', skills: ['Pembersihan Laut', 'Edukasi'], joinedDate: '2022', avatar: 'https://randomuser.me/api/portraits/women/1.jpg' },
-    { name: 'Budi W.', role: 'Relawan Medis', location: 'Jawa Barat', skills: ['Kesehatan', 'Evakuasi'], joinedDate: '2024', avatar: 'https://randomuser.me/api/portraits/men/2.jpg' }
+  const activities = [
+    {
+      title: 'Berbagi Takjil Ramadan',
+      date: 'Maret 2026',
+      location: 'Jakarta & Sekitarnya',
+      beneficiaries: 5000,
+      image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400'
+    },
+    {
+      title: 'Operasi Katarak Gratis',
+      date: 'Februari 2026',
+      location: 'Bandung, Jawa Barat',
+      beneficiaries: 150,
+      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400'
+    },
+    {
+      title: 'Banjir Bandang Cianjur',
+      date: 'Januari 2026',
+      location: 'Cianjur, Jawa Barat',
+      beneficiaries: 2500,
+      image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400'
+    },
+    {
+      title: 'Penanaman 10.000 Pohon',
+      date: 'Desember 2025',
+      location: 'Bogor, Jawa Barat',
+      beneficiaries: '10.000 pohon',
+      image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=400'
+    }
   ];
 
-  const landscapes = [
-    { image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800', title: 'Hutan Lestari', subtitle: 'Gerakan penanaman 10.000 pohon', action: 'Lihat Aksi →' },
-    { image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800', title: 'Bersihkan Laut', subtitle: 'Aksi bersih-bersih pantai serentak', action: 'Lihat Aksi →' },
-    { image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800', title: 'Save The Mountain', subtitle: 'Menyelamatkan ekosistem gunung', action: 'Lihat Aksi →' },
-    { image: 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=800', title: 'Sungai Bersih', subtitle: 'Program normalisasi sungai', action: 'Lihat Aksi →' },
-    { image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800', title: 'Desa Hijau', subtitle: 'Pemberdayaan desa berkelanjutan', action: 'Lihat Aksi →' },
-    { image: 'https://images.unsplash.com/photo-1549366021-9f761d450615?w=800', title: 'Lindungi Satwa', subtitle: 'Konservasi habitat alami', action: 'Lihat Aksi →' }
+  const testimonials = [
+    {
+      name: 'Siti Rahmawati',
+      role: 'Penerima Beasiswa',
+      text: 'Terima kasih Yayasan Peduli, saya bisa melanjutkan kuliah berkat beasiswa yang diberikan.',
+      avatar: 'https://randomuser.me/api/portraits/women/1.jpg'
+    },
+    {
+      name: 'Bambang Susilo',
+      role: 'Relawan',
+      text: 'Bergabung sebagai relawan adalah keputusan terbaik saya. Banyak pengalaman berharga.',
+      avatar: 'https://randomuser.me/api/portraits/men/1.jpg'
+    },
+    {
+      name: 'Nurul Hikmah',
+      role: 'Penerima Bantuan',
+      text: 'Bantuan yang diberikan sangat tepat sasaran dan membantu keluarga saya.',
+      avatar: 'https://randomuser.me/api/portraits/women/2.jpg'
+    }
   ];
 
-  const galleryImages = [
-    'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400',
-    'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400',
-    'https://images.unsplash.com/photo-1534190239940-491ba9df1f7e?w=400',
-    'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=400',
-    'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=400',
-    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400'
-  ];
+  const imgSlider = (index, color) => {
+    setActiveProduct(index);
+    setCircleColor(color);
+  };
 
   return (
-    <div>
-      <HeroSection />
-      
-      {/* Parallax 3D Landscape */}
-      <section className="section">
-        <motion.div className="reveal fade-up" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <h2 className="section-title">🌄 Galeri Aksi 3D</h2>
-          <p style={{ textAlign: 'center', marginBottom: '2rem', color: 'white', opacity: 0.9 }}>✨ Gerakkan mouse ke gambar untuk melihat efek 3D yang bergerak! ✨</p>
-        </motion.div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '1rem', marginTop: '2rem' }}>
-          {landscapes.map((item, index) => (
-            <motion.div key={index} className="reveal fade-up" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }}>
-              <ParallaxCard image={item.image} title={item.title} subtitle={item.subtitle}>
-                <button className="btn-view" style={{ marginTop: '1rem', width: 'auto', padding: '0.5rem 1.5rem', background: 'white', color: '#0a4c5c' }} onClick={() => alert(`Terima kasih tertarik dengan "${item.title}"!`)}>{item.action}</button>
-              </ParallaxCard>
-            </motion.div>
+    <div className="homepage">
+      {/* NAVBAR - STARBUCKS STYLE */}
+      <header className={`starbucks-header ${scrolled ? 'scrolled' : ''}`}>
+        <div className="header-container">
+          <a href="/" className="header-logo">
+            <img src="/images/logoterbaru.jpg" alt="Logo Aksi Terima Kasih" />
+            <span className="logo-text">Aksi<span>Terima Kasih</span></span>
+          </a>
+          
+          <ul className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
+            <li><a href="/">Home</a></li>
+            <li><a href="/volunteers">Relawan</a></li>
+            <li><a href="/activities">Kampanye</a></li>
+            <li><a href="/donation">Donasi</a></li>
+            <li><a href="/emergency">Bantuan</a></li>
+            <li><a href="/login" className="nav-login">Masuk</a></li>
+            <li><a href="/register" className="nav-register">Daftar</a></li>
+          </ul>
+          
+          <button 
+            className={`menu-toggle-btn ${isMenuOpen ? 'active' : ''}`}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </header>
+
+      {/* HERO SECTION - STARBUCKS STYLE */}
+      <section className="hero-starbucks">
+        <div className="circle-bg" style={{ background: circleColor }}></div>
+        
+        <div className="hero-container">
+          <div className="hero-text">
+            <motion.h2
+              key={activeProduct}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Aksi Terima Kasih <br />
+              <span>{products[activeProduct].title}</span>
+            </motion.h2>
+            <motion.p
+              key={activeProduct + 'desc'}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              {products[activeProduct].description}
+            </motion.p>
+            <motion.button
+              className="btn-donate"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Donasi Sekarang
+            </motion.button>
+          </div>
+
+          <div className="hero-image">
+            <motion.img
+              key={activeProduct}
+              src={products[activeProduct].image}
+              alt={products[activeProduct].title}
+              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
+            />
+          </div>
+        </div>
+
+        {/* Thumbnails */}
+        <ul className="thumb-list">
+          {products.map((product, index) => (
+            <li key={product.id}>
+              <img
+                src={product.thumb}
+                alt={product.title}
+                onClick={() => imgSlider(index, product.color)}
+              />
+            </li>
           ))}
+        </ul>
+
+        {/* Social Media Icons */}
+        <ul className="social-icons">
+          <li><a href="#"><img src="https://raw.githubusercontent.com/farazc60/Project-Images/main/starbucks/facebook.png" alt="Facebook" /></a></li>
+          <li><a href="#"><img src="https://raw.githubusercontent.com/farazc60/Project-Images/main/starbucks/instagram.png" alt="Instagram" /></a></li>
+          <li><a href="#"><img src="https://raw.githubusercontent.com/farazc60/Project-Images/main/starbucks/twitter.png" alt="Twitter" /></a></li>
+        </ul>
+      </section>
+
+      {/* Program Unggulan Section */}
+      <section className="programs-section">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-tag">Program Kami</span>
+            <h2>Program Unggulan</h2>
+            <p>Berbagai program sosial yang kami jalankan untuk membantu masyarakat</p>
+          </div>
+
+          <div className="programs-grid">
+            {products.map((program, index) => (
+              <motion.div
+                key={index}
+                className="program-card"
+                whileHover={{ y: -10, transition: { duration: 0.2 } }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="program-icon" style={{ background: `${program.color}15`, color: program.color }}>
+                  {program.icon}
+                </div>
+                <h3>{program.title}</h3>
+                <p>{program.description}</p>
+                <a href="#" className="program-link">Selengkapnya →</a>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Campaign Section */}
-      <section className="section">
-        <motion.div className="reveal fade-up" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <h2 className="section-title">Kampanye Kami</h2>
-        </motion.div>
-        <div className="cards-grid">
-          {campaigns.map((campaign, index) => (
-            <div key={index} className="reveal fade-up" style={{ transitionDelay: `${index * 0.1}s` }}>
-              <ActivityCard {...campaign} />
-            </div>
-          ))}
+      {/* Kegiatan Terbaru Section */}
+      <section className="activities-section">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-tag">Aksi Nyata</span>
+            <h2>Kegiatan Terbaru</h2>
+            <p>Setiap langkah kecil membawa perubahan besar</p>
+          </div>
+
+          <div className="activities-grid">
+            {activities.map((activity, index) => (
+              <motion.div
+                key={index}
+                className="activity-card"
+                whileHover={{ y: -5 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <img src={activity.image} alt={activity.title} />
+                <div className="activity-content">
+                  <h3>{activity.title}</h3>
+                  <p className="activity-meta">📅 {activity.date} • 📍 {activity.location}</p>
+                  <p className="activity-beneficiaries">❤️ {activity.beneficiaries} penerima manfaat</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <button className="btn-outline">Lihat Semua Kegiatan →</button>
+          </div>
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section className="section">
-        <motion.div className="reveal fade-up" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          <h2 className="section-title">📸 Dokumentasi Aksi</h2>
-          <p style={{ textAlign: 'center', marginBottom: '1.5rem', color: 'white', opacity: 0.8 }}>Momen-momen berharga para relawan dalam aksi kemanusiaan</p>
-        </motion.div>
-        <div className="gallery-grid">
-          {galleryImages.map((img, index) => (
-            <motion.div key={index} className="gallery-item" initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.05 }} onClick={() => window.open(img, '_blank')}>
-              <img src={img} alt={`Aksi ${index + 1}`} />
-              <div className="gallery-overlay"><span>📸 Klik untuk lihat</span></div>
-            </motion.div>
-          ))}
+      {/* Testimoni Section */}
+      <section className="testimonials-section">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-tag">Testimoni</span>
+            <h2>Kata Mereka Tentang Kami</h2>
+            <p>Cerita nyata dari penerima manfaat dan relawan kami</p>
+          </div>
+
+          <div className="testimonials-grid">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className="testimonial-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="testimonial-avatar">
+                  <img src={testimonial.avatar} alt={testimonial.name} />
+                </div>
+                <div className="testimonial-content">
+                  <p className="testimonial-text">"{testimonial.text}"</p>
+                  <h4>{testimonial.name}</h4>
+                  <span>{testimonial.role}</span>
+                  <div className="testimonial-stars">★★★★★</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Impact Stats */}
-      <section className="section">
-        <motion.div className="reveal scale" initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <h2 className="section-title">Dampak Aksi Relawan</h2>
-        </motion.div>
-        <div className="stats-section">
-          {[
-            { number: '5.000+', label: 'Relawan Aktif', icon: '👥', delay: 0 },
-            { number: '150+', label: 'Aksi & Investigasi', icon: '🎯', delay: 0.1 },
-            { number: '50.000+', label: 'Pohon Terlindungi', icon: '🌳', delay: 0.2 },
-            { number: '100.000+', label: 'Masyarakat Terbantu', icon: '🏠', delay: 0.3 }
-          ].map((stat, index) => (
-            <motion.div key={index} className="stat-card reveal fade-up" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: stat.delay, duration: 0.5 }} whileHover={{ scale: 1.05 }}>
-              <div style={{ fontSize: '2rem' }}>{stat.icon}</div>
-              <motion.h3 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: stat.delay + 0.2 }}>{stat.number}</motion.h3>
-              <p>{stat.label}</p>
-            </motion.div>
-          ))}
+      {/* CTA Donasi Section */}
+      <section className="cta-section">
+        <div className="container">
+          <div className="cta-icon">❤️</div>
+          <h2>Bersama Kita Bisa Membantu Lebih Banyak</h2>
+          <p>Setiap donasi Anda, sekecil apapun, akan memberikan dampak besar bagi mereka yang membutuhkan</p>
+          <div className="cta-buttons">
+            <button className="btn-primary">Donasi Sekarang</button>
+            <button className="btn-secondary">Jadi Relawan</button>
+          </div>
         </div>
       </section>
-
-      {/* Volunteers Section */}
-      <section className="section">
-        <motion.div className="reveal fade-right" initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-          <h2 className="section-title">Relawan Garda Terdepan</h2>
-        </motion.div>
-        <div className="cards-grid">
-          {topVolunteers.map((volunteer, index) => (
-            <div key={index} className="reveal fade-left" style={{ transitionDelay: `${index * 0.15}s` }}>
-              <VolunteerCard {...volunteer} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-     
-    {/* CTA Section - dengan logo bulat */}
-<motion.section className="cta-section" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-  <img 
-    src="/images/logobulat.jpg" 
-    alt="Logo Aksi Terima Kasih" 
-    style={{ 
-      width: '90px', 
-      height: '90px',
-      borderRadius: '50%',
-      objectFit: 'cover',
-      marginBottom: '1.5rem',
-      display: 'inline-block',
-      boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
-      border: '2px solid rgba(255,255,255,0.3)'
-    }} 
-  />
-  <motion.h2 animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity }}>Bergabung Menjadi Relawan Bumi</motion.h2>
-  <p>Setiap aksi nyata membawa perubahan untuk generasi mendatang</p>
-  <motion.button className="btn-large" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>Gabung Sekarang</motion.button>
-</motion.section>
     </div>
   );
 }
