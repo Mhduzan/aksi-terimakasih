@@ -1,256 +1,329 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './HomePage.css';
-import heroBg from '../assets/images/terimakasihbacgroun.jpg';
 import sosialisasi from '../assets/images/sosialisasi.jpg';
 import sosialisasi2 from '../assets/images/sosialisasi2.jpg';
-// import donorDarahImage from '../assets/images/donor-darah.jpg'; // ← TAMBAHKAN INI
+import heroBg from '../assets/images/terimakasihbacgroun.jpg';
 
 function HomePage() {
-  const [activeProduct, setActiveProduct] = useState(0);
-  const [circleColor, setCircleColor] = useState('#E74C3C');
+  const [active, setActive] = useState(0);
+  const sliderRef = useRef(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
 
-  const products = [
+  const programs = [
     {
       id: 0,
-      title: 'Program Berbagi Makanan',
+      title: 'Berbagi Makanan',
       subtitle: 'Buka Puasa & Makanan Bergizi',
       description: 'Berbagi makanan bergizi untuk anak-anak dan keluarga kurang mampu, terutama di bulan Ramadan dan hari-hari besar.',
-      buttonText: 'Dukung Program',
       image: '/images/logoterbaru.jpg',
-      thumb: '/images/logoterbaru.jpg',
-      color: '#E74C3C',
-      icon: '🍲'
+      color: '#C0392B',
+      gradient: 'linear-gradient(145deg, #922B21 0%, #C0392B 50%, #E74C3C 100%)',
+      icon: '🍲',
+      tag: 'Berbagi Makanan',
+      stat: '5.000+ penerima',
     },
-    // Program Pendidikan (opsional, bisa di-uncomment jika ingin ditampilkan)
-    // {
-    //   id: 1,
-    //   title: 'Program Pendidikan',
-    //   subtitle: 'Beasiswa & Bimbingan Belajar',
-    //   description: 'Memberikan beasiswa pendidikan dan bimbingan belajar gratis untuk anak-anak pra-sejahtera agar mereka bisa meraih cita-cita.',
-    //   buttonText: 'Dukung Program',
-    //   image: heroBg,
-    //   thumb: heroBg,
-    //   color: '#27AE60',
-    //   icon: '📚'
-    // },
     {
-      id: 2,
+      id: 1,
       title: 'Program Sembako',
       subtitle: 'Bahan Pokok & Sandang',
       description: 'Pembagian paket sembako dan pakaian layak pakai untuk keluarga kurang mampu di berbagai daerah.',
-      buttonText: 'Dukung Program',
       image: sosialisasi,
-      thumb: sosialisasi,
-      color: '#3498DB',
-      icon: '🛒'
+      color: '#1A5276',
+      gradient: 'linear-gradient(145deg, #0E3460 0%, #1A5276 50%, #2980B9 100%)',
+      icon: '🛒',
+      tag: 'Program Sembako',
+      stat: '3.000+ paket',
     },
     {
-      id: 3,
+      id: 2,
       title: 'Donor Darah',
-      subtitle: 'Kerjasama dengan PT Pulau Sambu & Sambu Group',
-      description: 'Program donor darah rutin yang bekerja sama dengan PT Pulau Sambu dan Sambu Group. Setiap tetes darah sangat berharga untuk menyelamatkan nyawa sesama. Ayo donor darah!',
-      buttonText: 'Daftar Donor',
-      image: sosialisasi,
-      thumb: sosialisasi,
-       color: '#27AE60',
-      icon: '🩸'
-    }
+      subtitle: 'Bersama PT Pulau Sambu',
+      description: 'Program donor darah rutin bersama PT Pulau Sambu dan Sambu Group. Setiap tetes darah sangat berharga untuk sesama.',
+      image: sosialisasi2,
+      color: '#1E8449',
+      gradient: 'linear-gradient(145deg, #145A32 0%, #1E8449 50%, #27AE60 100%)',
+      icon: '🩸',
+      tag: 'Donor Darah',
+      stat: '1.200+ kantong',
+    },
   ];
 
   const activities = [
-    {
-      title: 'Berbagi Takjil Ramadan',
-      date: 'Maret 2026',
-      location: 'Jakarta & Sekitarnya',
-      beneficiaries: 5000,
-      image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400'
-    },
-    {
-      title: 'Operasi Katarak Gratis',
-      date: 'Februari 2026',
-      location: 'Bandung, Jawa Barat',
-      beneficiaries: 150,
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400'
-    },
-    {
-      title: 'Banjir Bandang Cianjur',
-      date: 'Januari 2026',
-      location: 'Cianjur, Jawa Barat',
-      beneficiaries: 2500,
-      image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400'
-    },
-    {
-      title: 'Penanaman 10.000 Pohon',
-      date: 'Desember 2025',
-      location: 'Bogor, Jawa Barat',
-      beneficiaries: '10.000 pohon',
-      image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=400'
-    }
+    { title: 'Berbagi Takjil Ramadan', date: 'Maret 2026', location: 'Jakarta', beneficiaries: 5000, image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400' },
+    { title: 'Operasi Katarak Gratis', date: 'Februari 2026', location: 'Bandung', beneficiaries: 150, image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400' },
+    { title: 'Banjir Bandang Cianjur', date: 'Januari 2026', location: 'Cianjur', beneficiaries: 2500, image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400' },
+    { title: 'Penanaman 10.000 Pohon', date: 'Des 2025', location: 'Bogor', beneficiaries: '10rb pohon', image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=400' },
   ];
 
   const testimonials = [
-    {
-      name: 'Siti Rahmawati',
-      role: 'Penerima Beasiswa',
-      text: 'Terima kasih Yayasan Peduli, saya bisa melanjutkan kuliah berkat beasiswa yang diberikan.',
-      avatar: 'https://randomuser.me/api/portraits/women/1.jpg'
-    },
-    {
-      name: 'Bambang Susilo',
-      role: 'Relawan',
-      text: 'Bergabung sebagai relawan adalah keputusan terbaik saya. Banyak pengalaman berharga.',
-      avatar: 'https://randomuser.me/api/portraits/men/1.jpg'
-    },
-    {
-      name: 'Nurul Hikmah',
-      role: 'Penerima Bantuan',
-      text: 'Bantuan yang diberikan sangat tepat sasaran dan membantu keluarga saya.',
-      avatar: 'https://randomuser.me/api/portraits/women/2.jpg'
-    }
+    { name: 'Siti Rahmawati', role: 'Penerima Beasiswa', text: 'Terima kasih Yayasan Peduli, saya bisa melanjutkan kuliah berkat beasiswa yang diberikan.', avatar: 'https://randomuser.me/api/portraits/women/1.jpg' },
+    { name: 'Bambang Susilo', role: 'Relawan', text: 'Bergabung sebagai relawan adalah keputusan terbaik saya. Banyak pengalaman berharga.', avatar: 'https://randomuser.me/api/portraits/men/1.jpg' },
+    { name: 'Nurul Hikmah', role: 'Penerima Bantuan', text: 'Bantuan yang diberikan sangat tepat sasaran dan membantu keluarga saya.', avatar: 'https://randomuser.me/api/portraits/women/2.jpg' },
   ];
 
-  const imgSlider = (index, color) => {
-    setActiveProduct(index);
-    setCircleColor(color);
+  /* ---- drag-to-scroll ---- */
+  const onMouseDown = (e) => {
+    isDragging.current = true;
+    startX.current = e.pageX - sliderRef.current.offsetLeft;
+    scrollLeft.current = sliderRef.current.scrollLeft;
   };
+  const onMouseMove = (e) => {
+    if (!isDragging.current) return;
+    e.preventDefault();
+    const x = e.pageX - sliderRef.current.offsetLeft;
+    sliderRef.current.scrollLeft = scrollLeft.current - (x - startX.current);
+  };
+  const onMouseUp = () => { isDragging.current = false; };
+
+  const cur = programs[active];
 
   return (
     <div className="homepage">
-      {/* HERO SECTION - STARBUCKS STYLE */}
-      <section className="hero-starbucks">
-        <div className="circle-bg" style={{ background: circleColor }}></div>
-        
-        <div className="hero-container">
-          <div className="hero-text">
-            <motion.h2
-              key={activeProduct}
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              Aksi Terima Kasih <br />
-              <span>{products[activeProduct].title}</span>
-            </motion.h2>
-            <motion.p
-              key={activeProduct + 'desc'}
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              {products[activeProduct].description}
-            </motion.p>
-            <motion.button
-              className="btn-donate"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Donasi Sekarang
-            </motion.button>
-          </div>
 
-          <div className="hero-image">
-            <motion.img
-              key={activeProduct}
-              src={products[activeProduct].image}
-              alt={products[activeProduct].title}
-              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 0.5, type: 'spring', stiffness: 100 }}
-            />
+      {/* =============================================
+          HERO
+         ============================================= */}
+      <section className="hp-hero">
+
+        {/* Background gradient */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            className="hp-hero-bg"
+            style={{ background: cur.gradient }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          />
+        </AnimatePresence>
+
+        {/* Dekorasi orb */}
+        <div className="hp-orb hp-orb1" />
+        <div className="hp-orb hp-orb2" />
+        <div className="hp-dots" />
+
+        {/* Navbar mini */}
+        <div className="hp-nav">
+          <div className="hp-nav-logo">
+            <div className="hp-logo-circle">❤️</div>
+            <span className="hp-logo-text">Aksi Terima Kasih</span>
+          </div>
+          <div className="hp-nav-menu">
+            <span /><span /><span />
           </div>
         </div>
 
-        {/* Thumbnails */}
-        <ul className="thumb-list">
-          {products.map((product, index) => (
-            <li key={product.id}>
-              <img
-                src={product.thumb}
-                alt={product.title}
-                onClick={() => imgSlider(index, product.color)}
-              />
-            </li>
-          ))}
-        </ul>
+        {/* Tag */}
+        <motion.div
+          key={active + 'tag'}
+          className="hp-tag"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          <span className="hp-tag-dot" />
+          <span>Program Aktif 2026</span>
+        </motion.div>
 
-        {/* Social Media Icons */}
-        <ul className="social-icons">
-          <li><a href="#"><img src="https://raw.githubusercontent.com/farazc60/Project-Images/main/starbucks/facebook.png" alt="Facebook" /></a></li>
-          <li><a href="#"><img src="https://raw.githubusercontent.com/farazc60/Project-Images/main/starbucks/instagram.png" alt="Instagram" /></a></li>
-          <li><a href="#"><img src="https://raw.githubusercontent.com/farazc60/Project-Images/main/starbucks/twitter.png" alt="Twitter" /></a></li>
-        </ul>
-      </section>
+        {/* Text */}
+        <div className="hp-hero-text">
+          <p className="hp-eyebrow">Yayasan Peduli</p>
+          <motion.h1
+            key={active + 'h1'}
+            className="hp-title"
+            initial={{ opacity: 0, x: -24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            {cur.icon} <em>{cur.title}</em>
+          </motion.h1>
+          <motion.p
+            key={active + 'desc'}
+            className="hp-desc"
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.08 }}
+          >
+            {cur.description}
+          </motion.p>
+          <div className="hp-btns">
+            <button className="hp-btn-main">❤️ Donasi Sekarang</button>
+            <button className="hp-btn-ghost">Info →</button>
+          </div>
+        </div>
 
-      {/* Program Unggulan Section */}
-      <section className="programs-section">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tag">Program Kami</span>
-            <h2>Program Unggulan</h2>
-            <p>Berbagai program sosial yang kami jalankan untuk membantu masyarakat</p>
+        {/* ---- FOTO SLIDER (swipeable) ---- */}
+        <div className="hp-slider-wrap">
+
+          {/* Slider track */}
+          <div
+            className="hp-slider"
+            ref={sliderRef}
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseLeave={onMouseUp}
+            onMouseUp={onMouseUp}
+          >
+            {programs.map((p, i) => (
+              <div
+                key={p.id}
+                className={`hp-slide${active === i ? ' hp-slide--active' : ''}`}
+                onClick={() => setActive(i)}
+              >
+                {/* Shadow bawah gambar */}
+                <div className="hp-slide-shadow" />
+
+                {/* Foto */}
+                <div className="hp-slide-img-wrap">
+                  <img src={p.image} alt={p.title} className="hp-slide-img" />
+                </div>
+
+                {/* Badge aktif */}
+                {active === i && (
+                  <motion.div
+                    className="hp-slide-badge"
+                    initial={{ opacity: 0, scale: 0.7 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                  >
+                    ⭐ Unggulan
+                  </motion.div>
+                )}
+
+                {/* Label di bawah */}
+                <div className="hp-slide-label">
+                  <span className="hp-slide-icon">{p.icon}</span>
+                  <span className="hp-slide-name">{p.tag}</span>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="programs-grid">
-            {products.map((program, index) => (
-              <motion.div
-                key={index}
-                className="program-card"
-                whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="program-icon" style={{ background: `${program.color}15`, color: program.color }}>
-                  {program.icon}
-                </div>
-                <h3>{program.title}</h3>
-                <p>{program.description}</p>
-                <a href="#" className="program-link">Selengkapnya →</a>
-              </motion.div>
+          {/* Floating stat card kiri */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active + 'fcard'}
+              className="hp-float-card"
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35 }}
+            >
+              <span className="hp-fc-label">Penerima</span>
+              <span className="hp-fc-val">{cur.stat}</span>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Dot indicators */}
+          <div className="hp-dots-nav">
+            {programs.map((_, i) => (
+              <button
+                key={i}
+                className={`hp-dot-btn${active === i ? ' hp-dot-btn--on' : ''}`}
+                onClick={() => setActive(i)}
+              />
             ))}
           </div>
         </div>
+
+        {/* Wave */}
+        <div className="hp-wave">
+          <svg viewBox="0 0 390 44" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="44">
+            <path d="M0,10 C80,44 160,0 240,28 C300,48 350,12 390,22 L390,44 L0,44 Z" fill="#ffffff" />
+          </svg>
+        </div>
       </section>
 
-      {/* Kegiatan Terbaru Section */}
-      <section className="activities-section">
+      {/* =============================================
+          STATS + PROGRAM LIST
+         ============================================= */}
+      <section className="hp-bottom">
+
+        {/* Stats */}
+        <div className="hp-stats">
+          <div className="hp-stat">
+            <span className="hp-stat-num">500+</span>
+            <span className="hp-stat-lbl">Donatur</span>
+          </div>
+          <div className="hp-stat">
+            <span className="hp-stat-num">150jt</span>
+            <span className="hp-stat-lbl">Terkumpul</span>
+          </div>
+          <div className="hp-stat">
+            <span className="hp-stat-num">75%</span>
+            <span className="hp-stat-lbl">Target</span>
+          </div>
+        </div>
+
+        {/* Program list — food card style */}
+        <p className="hp-sec-title">Program Kami</p>
+        <div className="hp-prog-list">
+          {programs.map((p, i) => (
+            <motion.div
+              key={p.id}
+              className={`hp-prog-card${active === i ? ' hp-prog-card--active' : ''}`}
+              onClick={() => setActive(i)}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              style={active === i ? { borderColor: p.color } : {}}
+            >
+              <div className="hp-prog-img" style={{ background: p.color + '18' }}>
+                <img src={p.image} alt={p.title} />
+                <span className="hp-prog-icon">{p.icon}</span>
+              </div>
+              <div className="hp-prog-info">
+                <div className="hp-prog-name">{p.title}</div>
+                <div className="hp-prog-sub">{p.subtitle}</div>
+                <div className="hp-prog-stat" style={{ color: p.color }}>{p.stat}</div>
+              </div>
+              <div className="hp-prog-right">
+                <div className="hp-prog-badge" style={{ background: p.color + '18', color: p.color }}>Aktif</div>
+                <div className="hp-prog-arrow" style={{ background: p.color }}>→</div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* =============================================
+          KEGIATAN TERBARU
+         ============================================= */}
+      <section className="programs-section">
         <div className="container">
           <div className="section-header">
             <span className="section-tag">Aksi Nyata</span>
             <h2>Kegiatan Terbaru</h2>
             <p>Setiap langkah kecil membawa perubahan besar</p>
           </div>
-
           <div className="activities-grid">
-            {activities.map((activity, index) => (
-              <motion.div
-                key={index}
-                className="activity-card"
-                whileHover={{ y: -5 }}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <img src={activity.image} alt={activity.title} />
+            {activities.map((a, i) => (
+              <motion.div key={i} className="activity-card" whileHover={{ y: -5 }} initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
+                <img src={a.image} alt={a.title} />
                 <div className="activity-content">
-                  <h3>{activity.title}</h3>
-                  <p className="activity-meta">📅 {activity.date} • 📍 {activity.location}</p>
-                  <p className="activity-beneficiaries">❤️ {activity.beneficiaries} penerima manfaat</p>
+                  <h3>{a.title}</h3>
+                  <p className="activity-meta">📅 {a.date} • 📍 {a.location}</p>
+                  <p className="activity-beneficiaries">❤️ {a.beneficiaries} penerima manfaat</p>
                 </div>
               </motion.div>
             ))}
           </div>
-
           <div className="text-center">
             <button className="btn-outline">Lihat Semua Kegiatan →</button>
           </div>
         </div>
       </section>
 
-      {/* Testimoni Section */}
+      {/* =============================================
+          TESTIMONI
+         ============================================= */}
       <section className="testimonials-section">
         <div className="container">
           <div className="section-header">
@@ -258,24 +331,14 @@ function HomePage() {
             <h2>Kata Mereka Tentang Kami</h2>
             <p>Cerita nyata dari penerima manfaat dan relawan kami</p>
           </div>
-
           <div className="testimonials-grid">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className="testimonial-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div className="testimonial-avatar">
-                  <img src={testimonial.avatar} alt={testimonial.name} />
-                </div>
+            {testimonials.map((t, i) => (
+              <motion.div key={i} className="testimonial-card" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                <div className="testimonial-avatar"><img src={t.avatar} alt={t.name} /></div>
                 <div className="testimonial-content">
-                  <p className="testimonial-text">"{testimonial.text}"</p>
-                  <h4>{testimonial.name}</h4>
-                  <span>{testimonial.role}</span>
+                  <p className="testimonial-text">"{t.text}"</p>
+                  <h4>{t.name}</h4>
+                  <span>{t.role}</span>
                   <div className="testimonial-stars">★★★★★</div>
                 </div>
               </motion.div>
@@ -284,7 +347,9 @@ function HomePage() {
         </div>
       </section>
 
-      {/* CTA Donasi Section */}
+      {/* =============================================
+          CTA
+         ============================================= */}
       <section className="cta-section">
         <div className="container">
           <div className="cta-icon">❤️</div>
