@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
-import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import VolunteersPage from './pages/VolunteersPage';
@@ -12,7 +11,6 @@ import './App.css';
 function BackgroundAnimations() {
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 0, pointerEvents: 'none' }}>
-      {/* Daun Jatuh */}
       <div className="leaf leaf1">🍃</div>
       <div className="leaf leaf2">🍂</div>
       <div className="leaf leaf3">🌿</div>
@@ -23,8 +21,6 @@ function BackgroundAnimations() {
       <div className="leaf leaf8">🍂</div>
       <div className="leaf leaf9">🌿</div>
       <div className="leaf leaf10">🍃</div>
-
-      {/* Rintik Hujan */}
       <div className="raindrop rain1">💧</div>
       <div className="raindrop rain2">💧</div>
       <div className="raindrop rain3">💧</div>
@@ -35,13 +31,6 @@ function BackgroundAnimations() {
       <div className="raindrop rain8">💧</div>
       <div className="raindrop rain9">💧</div>
       <div className="raindrop rain10">💧</div>
-      <div className="raindrop rain11">💧</div>
-      <div className="raindrop rain12">💧</div>
-      <div className="raindrop rain13">💧</div>
-      <div className="raindrop rain14">💧</div>
-      <div className="raindrop rain15">💧</div>
-
-      {/* Partikel Berkilau */}
       <div className="sparkle sparkle1">✨</div>
       <div className="sparkle sparkle2">⭐</div>
       <div className="sparkle sparkle3">✨</div>
@@ -81,7 +70,6 @@ function App() {
     <Router>
       <BackgroundAnimations />
       <div className="app" style={{ position: 'relative', zIndex: 1 }}>
-        <Navbar />
         <main className="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
