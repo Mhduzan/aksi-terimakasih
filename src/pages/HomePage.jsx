@@ -4,7 +4,6 @@ import './HomePage.css';
 import heroBg from '../assets/images/terimakasihbacgroun.jpg';
 import sosialisasi from '../assets/images/sosialisasi.jpg';
 import sosialisasi2 from '../assets/images/sosialisasi2.jpg';
-// import donorDarahImage from '../assets/images/donor-darah.jpg'; // ← TAMBAHKAN INI
 
 function HomePage() {
   const [activeProduct, setActiveProduct] = useState(0);
@@ -22,18 +21,6 @@ function HomePage() {
       color: '#E74C3C',
       icon: '🍲'
     },
-    // Program Pendidikan (opsional, bisa di-uncomment jika ingin ditampilkan)
-    // {
-    //   id: 1,
-    //   title: 'Program Pendidikan',
-    //   subtitle: 'Beasiswa & Bimbingan Belajar',
-    //   description: 'Memberikan beasiswa pendidikan dan bimbingan belajar gratis untuk anak-anak pra-sejahtera agar mereka bisa meraih cita-cita.',
-    //   buttonText: 'Dukung Program',
-    //   image: heroBg,
-    //   thumb: heroBg,
-    //   color: '#27AE60',
-    //   icon: '📚'
-    // },
     {
       id: 2,
       title: 'Program Sembako',
@@ -49,65 +36,26 @@ function HomePage() {
       id: 3,
       title: 'Donor Darah',
       subtitle: 'Kerjasama dengan PT Pulau Sambu & Sambu Group',
-      description: 'Program donor darah rutin yang bekerja sama dengan PT Pulau Sambu dan Sambu Group. Setiap tetes darah sangat berharga untuk menyelamatkan nyawa sesama. Ayo donor darah!',
+      description: 'Program donor darah rutin yang bekerja sama dengan PT Pulau Sambu dan Sambu Group. Setiap tetes darah sangat berharga.',
       buttonText: 'Daftar Donor',
       image: sosialisasi,
       thumb: sosialisasi,
-       color: '#27AE60',
+      color: '#27AE60',
       icon: '🩸'
     }
   ];
 
   const activities = [
-    {
-      title: 'Berbagi Takjil Ramadan',
-      date: 'Maret 2026',
-      location: 'Jakarta & Sekitarnya',
-      beneficiaries: 5000,
-      image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400'
-    },
-    {
-      title: 'Operasi Katarak Gratis',
-      date: 'Februari 2026',
-      location: 'Bandung, Jawa Barat',
-      beneficiaries: 150,
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400'
-    },
-    {
-      title: 'Banjir Bandang Cianjur',
-      date: 'Januari 2026',
-      location: 'Cianjur, Jawa Barat',
-      beneficiaries: 2500,
-      image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400'
-    },
-    {
-      title: 'Penanaman 10.000 Pohon',
-      date: 'Desember 2025',
-      location: 'Bogor, Jawa Barat',
-      beneficiaries: '10.000 pohon',
-      image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=400'
-    }
+    { title: 'Berbagi Takjil Ramadan', date: 'Maret 2026', location: 'Jakarta & Sekitarnya', beneficiaries: 5000, image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=400' },
+    { title: 'Operasi Katarak Gratis', date: 'Februari 2026', location: 'Bandung, Jawa Barat', beneficiaries: 150, image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400' },
+    { title: 'Banjir Bandang Cianjur', date: 'Januari 2026', location: 'Cianjur, Jawa Barat', beneficiaries: 2500, image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400' },
+    { title: 'Penanaman 10.000 Pohon', date: 'Desember 2025', location: 'Bogor, Jawa Barat', beneficiaries: '10.000 pohon', image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=400' }
   ];
 
   const testimonials = [
-    {
-      name: 'Siti Rahmawati',
-      role: 'Penerima Beasiswa',
-      text: 'Terima kasih Yayasan Peduli, saya bisa melanjutkan kuliah berkat beasiswa yang diberikan.',
-      avatar: 'https://randomuser.me/api/portraits/women/1.jpg'
-    },
-    {
-      name: 'Bambang Susilo',
-      role: 'Relawan',
-      text: 'Bergabung sebagai relawan adalah keputusan terbaik saya. Banyak pengalaman berharga.',
-      avatar: 'https://randomuser.me/api/portraits/men/1.jpg'
-    },
-    {
-      name: 'Nurul Hikmah',
-      role: 'Penerima Bantuan',
-      text: 'Bantuan yang diberikan sangat tepat sasaran dan membantu keluarga saya.',
-      avatar: 'https://randomuser.me/api/portraits/women/2.jpg'
-    }
+    { name: 'Siti Rahmawati', role: 'Penerima Beasiswa', text: 'Terima kasih Yayasan Peduli, saya bisa melanjutkan kuliah berkat beasiswa yang diberikan.', avatar: 'https://randomuser.me/api/portraits/women/1.jpg' },
+    { name: 'Bambang Susilo', role: 'Relawan', text: 'Bergabung sebagai relawan adalah keputusan terbaik saya. Banyak pengalaman berharga.', avatar: 'https://randomuser.me/api/portraits/men/1.jpg' },
+    { name: 'Nurul Hikmah', role: 'Penerima Bantuan', text: 'Bantuan yang diberikan sangat tepat sasaran dan membantu keluarga saya.', avatar: 'https://randomuser.me/api/portraits/women/2.jpg' }
   ];
 
   const imgSlider = (index, color) => {
@@ -117,12 +65,36 @@ function HomePage() {
 
   return (
     <div className="homepage">
-      {/* HERO SECTION - STARBUCKS STYLE */}
+
+      {/* =============================================
+          HERO SECTION
+          - Desktop: circle bg + image kanan (unchanged)
+          - Mobile: full color top, wave, pill tabs, stats
+         ============================================= */}
       <section className="hero-starbucks">
-        <div className="circle-bg" style={{ background: circleColor }}></div>
-        
-        <div className="hero-container">
+
+        {/* ---- DESKTOP: circle background ---- */}
+        <div className="circle-bg" style={{ background: circleColor }} />
+
+        {/* ---- HERO CONTAINER ----
+            Mobile: background warna aktif via inline style,
+            Desktop: transparent (circle-bg yang handle) */}
+        <div
+          className="hero-container"
+          style={{ '--hero-color': circleColor }}
+        >
+          {/* Inject warna hero mobile via style tag inline */}
+          <style>{`
+            @media (max-width: 768px) {
+              .hero-container { background: ${circleColor}; }
+            }
+          `}</style>
+
+          {/* TEXT */}
           <div className="hero-text">
+            {/* Badge — hanya terlihat di mobile via CSS */}
+            <span className="hero-badge">✨ Aksi Terima Kasih</span>
+
             <motion.h2
               key={activeProduct}
               initial={{ opacity: 0, x: -50 }}
@@ -132,6 +104,7 @@ function HomePage() {
               Aksi Terima Kasih <br />
               <span>{products[activeProduct].title}</span>
             </motion.h2>
+
             <motion.p
               key={activeProduct + 'desc'}
               initial={{ opacity: 0, x: -30 }}
@@ -140,6 +113,7 @@ function HomePage() {
             >
               {products[activeProduct].description}
             </motion.p>
+
             <motion.button
               className="btn-donate"
               whileHover={{ scale: 1.05 }}
@@ -149,6 +123,7 @@ function HomePage() {
             </motion.button>
           </div>
 
+          {/* IMAGE */}
           <div className="hero-image">
             <motion.img
               key={activeProduct}
@@ -161,7 +136,54 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Thumbnails */}
+        {/* ---- WAVE SEPARATOR (mobile only) ---- */}
+        <div className="hero-wave">
+          <svg
+            viewBox="0 0 390 48"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            style={{ height: 48 }}
+          >
+            <path
+              d={`M0,0 C80,48 160,0 260,32 C320,50 360,20 390,28 L390,48 L0,48 Z`}
+              fill="#fff9f5"
+            />
+          </svg>
+        </div>
+
+        {/* ---- MOBILE BOTTOM: pill tabs + stats ---- */}
+        <div className="hero-mobile-bottom">
+          {/* Pill category tabs */}
+          <div className="hero-pill-tags">
+            {products.map((p, i) => (
+              <button
+                key={p.id}
+                className={`hero-pill${activeProduct === i ? ' active' : ''}`}
+                onClick={() => imgSlider(i, p.color)}
+              >
+                {p.icon} {p.title.split(' ').slice(1).join(' ')}
+              </button>
+            ))}
+          </div>
+
+          {/* Mini statistics bar */}
+          <div className="hero-stats">
+            <div className="hero-stat-item">
+              <span className="hero-stat-num">500+</span>
+              <span className="hero-stat-lbl">Donatur</span>
+            </div>
+            <div className="hero-stat-item">
+              <span className="hero-stat-num">150jt</span>
+              <span className="hero-stat-lbl">Terkumpul</span>
+            </div>
+            <div className="hero-stat-item">
+              <span className="hero-stat-num">75%</span>
+              <span className="hero-stat-lbl">Target</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ---- DESKTOP: thumbs & social (unchanged) ---- */}
         <ul className="thumb-list">
           {products.map((product, index) => (
             <li key={product.id}>
@@ -174,7 +196,6 @@ function HomePage() {
           ))}
         </ul>
 
-        {/* Social Media Icons */}
         <ul className="social-icons">
           <li><a href="#"><img src="https://raw.githubusercontent.com/farazc60/Project-Images/main/starbucks/facebook.png" alt="Facebook" /></a></li>
           <li><a href="#"><img src="https://raw.githubusercontent.com/farazc60/Project-Images/main/starbucks/instagram.png" alt="Instagram" /></a></li>
@@ -182,7 +203,9 @@ function HomePage() {
         </ul>
       </section>
 
-      {/* Program Unggulan Section */}
+      {/* =============================================
+          PROGRAM SECTION
+         ============================================= */}
       <section className="programs-section">
         <div className="container">
           <div className="section-header">
@@ -190,7 +213,6 @@ function HomePage() {
             <h2>Program Unggulan</h2>
             <p>Berbagai program sosial yang kami jalankan untuk membantu masyarakat</p>
           </div>
-
           <div className="programs-grid">
             {products.map((program, index) => (
               <motion.div
@@ -214,7 +236,9 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Kegiatan Terbaru Section */}
+      {/* =============================================
+          KEGIATAN TERBARU
+         ============================================= */}
       <section className="activities-section">
         <div className="container">
           <div className="section-header">
@@ -222,7 +246,6 @@ function HomePage() {
             <h2>Kegiatan Terbaru</h2>
             <p>Setiap langkah kecil membawa perubahan besar</p>
           </div>
-
           <div className="activities-grid">
             {activities.map((activity, index) => (
               <motion.div
@@ -243,14 +266,15 @@ function HomePage() {
               </motion.div>
             ))}
           </div>
-
           <div className="text-center">
             <button className="btn-outline">Lihat Semua Kegiatan →</button>
           </div>
         </div>
       </section>
 
-      {/* Testimoni Section */}
+      {/* =============================================
+          TESTIMONI
+         ============================================= */}
       <section className="testimonials-section">
         <div className="container">
           <div className="section-header">
@@ -258,9 +282,8 @@ function HomePage() {
             <h2>Kata Mereka Tentang Kami</h2>
             <p>Cerita nyata dari penerima manfaat dan relawan kami</p>
           </div>
-
           <div className="testimonials-grid">
-            {testimonials.map((testimonial, index) => (
+            {testimonials.map((t, index) => (
               <motion.div
                 key={index}
                 className="testimonial-card"
@@ -270,12 +293,12 @@ function HomePage() {
                 transition={{ delay: index * 0.1 }}
               >
                 <div className="testimonial-avatar">
-                  <img src={testimonial.avatar} alt={testimonial.name} />
+                  <img src={t.avatar} alt={t.name} />
                 </div>
                 <div className="testimonial-content">
-                  <p className="testimonial-text">"{testimonial.text}"</p>
-                  <h4>{testimonial.name}</h4>
-                  <span>{testimonial.role}</span>
+                  <p className="testimonial-text">"{t.text}"</p>
+                  <h4>{t.name}</h4>
+                  <span>{t.role}</span>
                   <div className="testimonial-stars">★★★★★</div>
                 </div>
               </motion.div>
@@ -284,7 +307,9 @@ function HomePage() {
         </div>
       </section>
 
-      {/* CTA Donasi Section */}
+      {/* =============================================
+          CTA DONASI
+         ============================================= */}
       <section className="cta-section">
         <div className="container">
           <div className="cta-icon">❤️</div>
