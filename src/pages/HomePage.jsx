@@ -9,17 +9,6 @@ import sosialisasi2 from '../assets/images/sosialisasi2.jpg';
 function HomePage() {
   const [activeProduct, setActiveProduct] = useState(0);
   const [circleColor, setCircleColor] = useState('#E74C3C');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  // Handle scroll effect
-  useState(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const products = [
     {
@@ -128,35 +117,6 @@ function HomePage() {
 
   return (
     <div className="homepage">
-      {/* NAVBAR - STARBUCKS STYLE */}
-      <header className={`starbucks-header ${scrolled ? 'scrolled' : ''}`}>
-        <div className="header-container">
-          <a href="/" className="header-logo">
-            <img src="/images/logoterbaru.jpg" alt="Logo Aksi Terima Kasih" />
-            <span className="logo-text">Aksi<span>Terima Kasih</span></span>
-          </a>
-          
-          <ul className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
-            <li><a href="/">Home</a></li>
-            <li><a href="/volunteers">Relawan</a></li>
-            <li><a href="/activities">Kampanye</a></li>
-            <li><a href="/donation">Donasi</a></li>
-            <li><a href="/emergency">Bantuan</a></li>
-            <li><a href="/login" className="nav-login">Masuk</a></li>
-            <li><a href="/register" className="nav-register">Daftar</a></li>
-          </ul>
-          
-          <button 
-            className={`menu-toggle-btn ${isMenuOpen ? 'active' : ''}`}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-      </header>
-
       {/* HERO SECTION - STARBUCKS STYLE */}
       <section className="hero-starbucks">
         <div className="circle-bg" style={{ background: circleColor }}></div>

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
+import SharedNavbar from './components/layout/SharedNavbar';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import VolunteersPage from './pages/VolunteersPage';
@@ -26,21 +27,11 @@ function BackgroundAnimations() {
       <div className="raindrop rain3">💧</div>
       <div className="raindrop rain4">💧</div>
       <div className="raindrop rain5">💧</div>
-      <div className="raindrop rain6">💧</div>
-      <div className="raindrop rain7">💧</div>
-      <div className="raindrop rain8">💧</div>
-      <div className="raindrop rain9">💧</div>
-      <div className="raindrop rain10">💧</div>
       <div className="sparkle sparkle1">✨</div>
       <div className="sparkle sparkle2">⭐</div>
       <div className="sparkle sparkle3">✨</div>
       <div className="sparkle sparkle4">💫</div>
       <div className="sparkle sparkle5">✨</div>
-      <div className="sparkle sparkle6">⭐</div>
-      <div className="sparkle sparkle7">✨</div>
-      <div className="sparkle sparkle8">💫</div>
-      <div className="sparkle sparkle9">✨</div>
-      <div className="sparkle sparkle10">⭐</div>
     </div>
   );
 }
@@ -50,35 +41,33 @@ function App() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          }
+          if (entry.isIntersecting) entry.target.classList.add('active');
         });
       },
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
-
     const revealElements = document.querySelectorAll('.reveal');
     revealElements.forEach((el) => observer.observe(el));
-
-    return () => {
-      revealElements.forEach((el) => observer.unobserve(el));
-    };
+    return () => revealElements.forEach((el) => observer.unobserve(el));
   }, []);
 
   return (
     <Router>
       <BackgroundAnimations />
       <div className="app" style={{ position: 'relative', zIndex: 1 }}>
-        <main className="main-content">
+        {/* Navbar global — muncul di semua halaman */}
+        <SharedNavbar />
+
+        <main className="main-content snav-offset">
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/"           element={<HomePage />} />
             <Route path="/volunteers" element={<VolunteersPage />} />
             <Route path="/activities" element={<ActivitiesPage />} />
-            <Route path="/donation" element={<DonationPage />} />
-            <Route path="/emergency" element={<EmergencyPage />} />
+            <Route path="/donation"   element={<DonationPage />} />
+            <Route path="/emergency"  element={<EmergencyPage />} />
           </Routes>
         </main>
+
         <Footer />
       </div>
     </Router>
