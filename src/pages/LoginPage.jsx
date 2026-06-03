@@ -14,11 +14,10 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(''); setLoading(true);
-    await new Promise(r => setTimeout(r, 700));
-    const result = login(form.username, form.password);
+    const result = await login(form.username, form.password);
     setLoading(false);
     if (result.ok) navigate('/dashboard');
-    else setError(result.msg);
+    else setError(result.msg || 'Login gagal.');
   };
 
   const demoAccounts = [
